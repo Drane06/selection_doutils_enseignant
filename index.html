@@ -3,280 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Répertoire d'Outils IA Interactifs</title>
-    <!-- Chargement de Tailwind CSS pour un style moderne et coloré -->
+    <title>Répertoire Interactif des Outils IA</title>
+    <!-- Tailwind CSS pour un style moderne -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Configuration de la police Inter et couleurs de base */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc; /* Arrière-plan très clair */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
         }
-        .accordion-header, .nested-accordion-header {
-            transition: all 0.3s ease;
+        .header-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%);
         }
         .tool-card {
-            border-left: 5px solid;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
+            border-left: 4px solid #3b82f6;
         }
         .tool-card:hover {
-            transform: none; /* Rendu plus sobre */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Ombre légère */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #f1f5f9;
         }
-        /* Dégradé de bleu pour l'en-tête */
-        .header-gradient {
-            background: linear-gradient(90deg, #3b82f6 0%, #4f46e5 100%); /* Blue to Indigo gradient */
+        .accordion-content, .nested-accordion-content {
+            display: none;
+            overflow: hidden;
+        }
+        .accordion-content.active, .nested-accordion-content.active {
+            display: block;
+        }
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotate-icon.active {
+            transform: rotate(180deg);
+        }
+        .search-container {
+            position: sticky;
+            top: 1rem;
+            z-index: 50;
+        }
+        /* Style spécifique pour les badges de prix */
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
         }
     </style>
 </head>
-<body class="p-4 sm:p-8">
+<body class="p-4 sm:p-8 antialiased">
     <div class="max-w-4xl mx-auto">
-        <!-- En-tête de la page (Dégradé de bleu) -->
-        <header class="text-center mb-10 p-6 header-gradient text-white rounded-xl shadow-lg">
-            <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">
+        <!-- En-tête -->
+        <header class="text-center mb-10 p-8 header-gradient text-white rounded-3xl shadow-xl">
+            <h1 class="text-3xl sm:text-5xl font-extrabold mb-3 tracking-tight">
                 Répertoire d'outils d'Intelligence Artificielle
             </h1>
-            <p class="text-blue-200 text-lg">
-                Quelques outils testés (liste non exhaustive).
+            <p class="text-blue-100 text-lg opacity-90 max-w-2xl mx-auto">
+                Guide complet des solutions testées pour l'éducation, la créativité et la productivité.
             </p>
         </header>
 
-        <!-- Avertissement général (ATTENTION) - Utilise des tons de bleu pour la sobriété -->
-        <div class="p-4 mb-8 bg-white border-l-4 border-blue-500 text-blue-800 rounded-lg shadow-sm">
-            <p class="font-semibold">🔔 Attention :</p>
-            <p class="text-sm">L’intelligence artificielle évolue très rapidement. Cette liste est susceptible de changer avec l’apparition de nouvelles solutions et l’amélioration des existantes.</p>
+        <!-- Barre de recherche -->
+        <div class="search-container mb-8">
+            <div class="relative shadow-lg rounded-2xl">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" id="searchInput" 
+                    placeholder="Rechercher un outil ou une catégorie..." 
+                    class="block w-full pl-12 pr-4 py-4 bg-white border-none rounded-2xl focus:ring-4 focus:ring-blue-500/20 outline-none transition-all text-lg">
+            </div>
         </div>
 
-        <!-- SECTION DÉPLACÉE : INTRODUCTION ET RECOMMANDATIONS -->
-        <section class="mb-10 p-6 bg-white border-t-4 border-blue-500 rounded-xl shadow-md">
-            <h2 class="text-2xl font-extrabold text-blue-800 mb-3">
-                Bienvenue dans le guide des outils d’Intelligence Artificielle générative pour l’éducation !
-            </h2>
-            <p class="mb-4 text-gray-700">
-                Ce répertoire propose une sélection d’applications testées, adaptées au contexte scolaire et classées par usage. L’objectif n’est pas d’encourager une consommation massive, mais de mieux comprendre, choisir et encadrer leur usage dans l’enseignement, au service de la pédagogie, de la créativité, d'un gain de temps mais aussi de l'éthique. Tout cela en respectant le cadre d'usage de l'IA en éducation.
+        <!-- Introduction et Recommandations -->
+        <section class="mb-10 p-6 bg-white border-t-4 border-blue-500 rounded-2xl shadow-sm">
+            <h2 class="text-2xl font-bold text-blue-800 mb-4">Bienvenue dans le guide des outils d’IA générative !</h2>
+            <p class="mb-6 text-gray-600 leading-relaxed">
+                Ce répertoire propose une sélection d’applications testées, adaptées au contexte scolaire. L’objectif est de mieux comprendre, choisir et encadrer leur usage dans l’enseignement, tout en respectant l'éthique et le gain de temps pédagogique.
             </p>
 
-            <h3 class="text-xl font-bold text-blue-700 mb-2">Pourquoi ce guide ?</h3>
-            <p class="mb-4 text-gray-700">
-                Les outils d’IA générative peuvent :
-                <ul class="list-disc list-inside ml-4 space-y-1 text-gray-700">
-                    <li>aider à préparer des supports, différencier les apprentissages, ludifier,</li>
-                    <li>mais aussi soulever des questions éthiquesimportantes.</li>
-                </ul>
-            </p>
-
-            <h3 class="text-xl font-bold text-red-600 mb-2 mt-4">⚠️ Recommandations d’usage</h3>
-            <ul class="list-disc list-inside ml-4 space-y-1 text-gray-800">
-                <li>Ne jamais saisir de données personnelles d’élèves ou de documents contenant des informations confidentielles.</li>
-                <li>Privilégier les outils hébergés en Europe, respectant le RGPD.</li>
-                <li>Croiser systématiquement les sources et éviter les usages automatisés sans relecture humaine.</li>
-            </ul>
-            <div class="mt-6 p-3 bg-blue-100 border-l-4 border-blue-600 rounded-lg">
-                <p class="font-extrabold text-blue-900 flex items-center">
-                    <span class="text-2xl mr-2"> </span> À retenir : Les outils d'IA génératives ne sont pas des remplaçants, seulement des assistants pédagogiques.
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-bold text-blue-700 mb-2">Pourquoi ce guide ?</h3>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                        <li>Préparer des supports variés</li>
+                        <li>Différencier les apprentissages</li>
+                        <li>Ludifier les enseignements</li>
+                        <li>Aborder les questions éthiques</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                    <h3 class="text-lg font-bold text-red-600 mb-2">⚠️ Recommandations</h3>
+                    <ul class="space-y-1 text-xs text-red-800 font-medium">
+                        <li>• Aucune donnée personnelle d'élève.</li>
+                        <li>• Privilégier les outils hébergés en Europe ou Suisse (RGPD/LPD).</li>
+                        <li>• Toujours croiser les sources.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                <p class="text-blue-900 font-bold flex items-center italic">
+                    <span class="text-xl mr-2">💡</span> À retenir : L'IA est un assistant pédagogique, pas un remplaçant.
                 </p>
             </div>
         </section>
 
-        <!-- Conteneur principal des accordéons -->
-        <div id="accordion-container" class="space-y-6">
+        <!-- ACCORDÉONS PRINCIPAUX -->
+        <div id="accordion-container" class="space-y-4">
 
-            <!-- Catégorie A: Outils pour comprendre l’IA (Ordre 1) - Tons de bleu clair -->
-            <div class="accordion-item bg-white rounded-xl shadow-lg overflow-hidden">
-                <button class="accordion-header w-full flex justify-between items-center p-5 font-bold text-xl text-blue-800 bg-blue-100 hover:bg-blue-200 focus:outline-none" aria-expanded="false" aria-controls="content-a">
-                    <span>💡 A. Outils pour comprendre l’IA</span>
-                    <svg class="arrow-icon w-6 h-6 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- CATÉGORIE A -->
+            <div class="category-block bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors" onclick="toggleAccordion('content-a')">
+                    <span class="text-xl font-bold text-slate-800 flex items-center">
+                        <span class="mr-3 p-2 bg-blue-100 text-blue-600 rounded-lg">💡</span>
+                        A. Outils pour comprendre l’IA
+                    </span>
+                    <svg id="icon-content-a" class="rotate-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="content-a" class="accordion-content hidden p-5 space-y-4 border-t border-blue-300">
-                    <div class="space-y-4">
-                        <!-- Outil: NOVAPEDA -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">NOVAPEDA 🇫🇷 (open-source) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                            <p class="text-sm mb-2">Plateforme éducative pour apprendre les principes de l’IA. Ressources pédagogiques, simulations et transparence open-source.</p>
-                            <a href="https://novapeda.eu/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                <div id="content-a" class="accordion-content p-6 pt-0 space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="tool-card p-4 rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-blue-700">NOVAPEDA 🇫🇷 <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                            <p class="text-xs text-gray-600 mt-1">Apprendre les principes de l'IA. Ressources pédagogiques et simulations open-source.</p>
+                            <a href="https://novapeda.eu/" target="_blank" class="inline-block mt-3 text-sm font-bold text-blue-600 hover:underline">Accéder →</a>
                         </div>
-                        <!-- Outil: Vittascience -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">Vittascience 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                            <p class="text-sm mb-2">Site éducatif expliquant le fonctionnement des réseaux de neurones et l’impact énergétique de l’IA. Liens pédagogiques vers des expériences interactives.</p>
-                            <a href="https://fr.vittascience.com/ia/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div class="tool-card p-4 rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-blue-700">Vittascience 🇫🇷 <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                            <p class="text-xs text-gray-600 mt-1">Fonctionnement des réseaux de neurones et impact énergétique de l'IA.</p>
+                            <a href="https://fr.vittascience.com/ia/" target="_blank" class="inline-block mt-3 text-sm font-bold text-blue-600 hover:underline">Accéder →</a>
                         </div>
-                        <!-- Outil: Activités pédagogiques sur les biais (HEPL) -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">Activités pédagogiques sur les biais <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                            <p class="text-sm mb-2">Exercices interactifs pour miuex comprendre la notion de biais.</p>
-                            <a href="https://mi.hepl.ch/projects/ia/ia.html" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div class="tool-card p-4 rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-blue-700">Biais (HEPL) <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                            <p class="text-xs text-gray-600 mt-1">Exercices interactifs pour comprendre les biais de l'intelligence artificielle.</p>
+                            <a href="https://mi.hepl.ch/projects/ia/ia.html" target="_blank" class="inline-block mt-3 text-sm font-bold text-blue-600 hover:underline">Accéder →</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Catégorie B: Outils testables sans création de compte (Ordre 2) - Tons de bleu clair -->
-            <div class="accordion-item bg-white rounded-xl shadow-lg overflow-hidden">
-                <button class="accordion-header w-full flex justify-between items-center p-5 font-bold text-xl text-blue-800 bg-blue-100 rounded-t-xl hover:bg-blue-200 focus:outline-none" aria-expanded="false" aria-controls="content-b">
-                    <span>🧩 B. Outils testables sans création de compte</span>
-                    <!-- Flèche pointant vers le bas (état fermé) -->
-                    <svg class="arrow-icon w-6 h-6 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- CATÉGORIE B -->
+            <div class="category-block bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors" onclick="toggleAccordion('content-b')">
+                    <span class="text-xl font-bold text-slate-800 flex items-center">
+                        <span class="mr-3 p-2 bg-purple-100 text-purple-600 rounded-lg">🧩</span>
+                        B. Sans création de compte
+                    </span>
+                    <svg id="icon-content-b" class="rotate-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="content-b" class="accordion-content hidden p-5 space-y-6 border-t border-blue-300">
-
-                    <!-- Sous-catégorie 1: Génération de texte & chatbots -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b1">
-                            <span>💬 Génération de texte & chatbots</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div id="content-b" class="accordion-content p-6 pt-0 space-y-4">
+                    
+                    <!-- B1: Texte -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b1')">
+                            <span>💬 Génération de texte & Chatbots</span>
+                            <svg id="icon-sub-b1" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b1" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Vittascience -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-lg font-bold text-blue-700">Vittascience 🇫🇷</h4>
-                                    <span class="text-sm font-semibold px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">💰 Gratuit</span>
-                                </div>
-                                <p class="text-sm italic mb-2">Plateforme éducative française dédiée à l’apprentissage des sciences et de l’IA. Propose des modules de génération de texte simples.</p>
-                                <a href="https://fr.vittascience.com/ia/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center">
-                                    🔗 Lien vers l'outil
-                                </a>
+                        <div id="sub-b1" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Euria 🇨🇭 <span class="badge bg-green-100 text-green-700 ml-1">Gratuit / Illimité</span></h4>
+                                <p class="text-xs text-gray-500">Chatbot suisse multimodal (Mistral, Llama). Analyse d'images/docs et recherche web. Pas de conservation de données (RGPD/LPD).</p>
+                                <a href="https://euria.ch" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
-                            <!-- Outil: Perplexity AI (texte) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-lg font-bold text-blue-700">Perplexity AI</h4>
-                                    <span class="text-sm font-semibold px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">💰 Freemium</span>
-                                </div>
-                                <p class="text-sm mb-2">Moteur de recherche conversationnel de nouvelle génération. Il répond directement aux questions en synthétisant les informations du web tout en citant ses sources. (Fonctionnalité principale sans compte : la réponse synthétisée).</p>
-                                <a href="https://www.perplexity.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center">
-                                    🔗 Lien vers l'outil
-                                </a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Lumo (Proton) 🇨🇭 <span class="badge bg-blue-100 text-blue-700 ml-1">Vie privée</span></h4>
+                                <p class="text-xs text-gray-500">Assistant IA conçu pour la rédaction, le résumé et l'analyse de fichiers avec protection maximale des données. Idéal pour les contextes sensibles.</p>
+                                <a href="https://proton.me/lumo" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
+                            </div>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Perplexity AI <span class="badge bg-yellow-100 text-yellow-700 ml-1">Freemium</span></h4>
+                                <p class="text-xs text-gray-500">Moteur de recherche conversationnel avec synthèse et sources.</p>
+                                <a href="https://www.perplexity.ai" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
+                            </div>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Vittascience <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500">Modules de génération de texte simples et éducatifs.</p>
+                                <a href="https://fr.vittascience.com/ia/" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 5: Génération de prompt -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b5-new">
+                    <!-- B5: Prompt -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b5')">
                             <span>⚙️ Génération de prompt</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="icon-sub-b5" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b5-new" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Pataprompt -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Pataprompt (NOVAPEDA) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit / open source</span></h4>
-                                <p class="text-sm mb-2">Générateur de prompt intelligent qui aide à formuler des requêtes complexes pour les IA génératives afin d’obtenir des résultats optimaux.</p>
-                                <a href="https://novapeda.eu/pataprompt" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-b5" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Pataprompt (NOVAPEDA) <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500">Aide à formuler des requêtes complexes.</p>
+                                <a href="https://novapeda.eu/pataprompt" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
+                            </div>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Générateur de prompts pédagogiques <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500">Conçu spécifiquement pour créer des instructions adaptées au milieu scolaire.</p>
+                                <a href="https://novapeda.eu/genprompt" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 2: Génération d’images  -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b2">
+                    <!-- B2: Images simples -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b2')">
                             <span>🖼️ Génération d’images simples</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="icon-sub-b2" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b2" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Vittascience (composant visuel) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Vittascience (composant visuel) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Propose un outil de génération d'image gratuit.</p>
-                                <a href="https://fr.vittascience.com/ia/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil: Crayon -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Crayon <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Outil simple et rapide pour générer des images à partir d’une description textuelle, accessible sans compte. Parfait pour les illustrations originales ou les supports visuels scolaires.</p>
-                                <a href="https://www.craiyon.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil: DeepAI -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">DeepAI <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Crée des images réalistes ou artistiques à partir d’un texte. Permet de choisir différents styles. Intéressant pour illustrer des notions abstraites.</p>
-                                <a href="https://deepai.org" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil: Perchance (génération) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Perchance <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Plateforme très accessible pour générer du texte ou des images à partir de modèles prédéfinis, sans inscription.</p>
-                                <a href="https://perchance.org/ai-text-to-image-generator" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-b2" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                    <h4 class="font-bold text-slate-800">Vittascience <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                    <a href="https://fr.vittascience.com/ia/" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Accéder</a>
+                                </div>
+                                <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                    <h4 class="font-bold text-slate-800">Craiyon <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                    <a href="https://www.craiyon.com" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Accéder</a>
+                                </div>
+                                <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                    <h4 class="font-bold text-slate-800">DeepAI <span class="badge bg-yellow-100 text-yellow-700 ml-1">Freemium</span></h4>
+                                    <a href="https://deepai.org" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Accéder</a>
+                                </div>
+                                <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                    <h4 class="font-bold text-slate-800">Perchance <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                    <a href="https://perchance.org/ai-text-to-image-generator" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Accéder</a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 3: Recherches éthiques  -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b3">
-                            <span>🔎 Recherche éthique </span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- B3: Recherche éthique -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b3')">
+                            <span>🔎 Recherche éthique</span>
+                            <svg id="icon-sub-b3" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b3" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Perplexity AI (recherche) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Perplexity AI <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Moteur de recherche conversationnel citant ses sources. Avantages : réponses vérifiables, synthèse des résultats, interface intuitive.</p>
-                                <a href="https://www.perplexity.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-b3" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Perplexity AI</h4>
+                                <a href="https://www.perplexity.ai" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
-                            <!-- Outil: Qwant IA -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Qwant IA 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Moteur de recherche français intégrant un résumé IA et protégeant la vie privée.</p>
-                                <a href="https://betterweb.qwant.com/2024/05/15/qwant-evolue-decouvrez-le-nouveau-qwant/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Qwant IA 🇫🇷</h4>
+                                <a href="https://betterweb.qwant.com/2024/05/15/qwant-evolue-decouvrez-le-nouveau-qwant/" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
-                            <!-- Outil: DuckDuckGo IA -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">DuckDuckGo IA <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Moteur privé sans traçage, avec réponses enrichies par IA.</p>
-                                <a href="https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">DuckDuckGo IA</h4>
+                                <a href="https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 4: Outils pédagogiques (Audio/Texte) -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b4">
-                            <span>🎧 Outils pédagogiques (Audio/Texte)</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- B4: Audio / Texte -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b4')">
+                            <span>🎧 Audio & Texte Pédagogiques</span>
+                            <svg id="icon-sub-b4" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b4" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Scribens -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Scribens 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Correcteur orthographique et grammatical avancé, optimisé pour le français, avec suggestions de reformulation et analyse stylistique.</p>
-                                <a href="https://www.scribens.fr" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-b4" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Scribens 🇫🇷 <span class="badge bg-yellow-100 text-yellow-700 ml-1">Freemium</span></h4>
+                                <p class="text-xs text-gray-500 italic">Correcteur orthographique avancé.</p>
+                                <a href="https://www.scribens.fr" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
-                            <!-- Outil: ComparIA -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">ComparIA (Ministère de la Culture) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Compare différentes IA, aborde les biais, l’impact écologique et la transparence.</p>
-                                <a href="https://comparia.beta.gouv.fr/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">ComparIA 🇫🇷 <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500 italic">Compare les biais et l'impact des IA.</p>
+                                <a href="https://comparia.beta.gouv.fr/" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
-                            <!-- Outil: TTS Maker -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">TTS Maker <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Synthèse vocale gratuite, sans compte. Idéal pour créer des supports audio.</p>
-                                <a href="https://ttsmaker.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">TTS Maker <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500 italic">Synthèse vocale gratuite sans compte.</p>
+                                <a href="https://ttsmaker.com" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
-                            <!-- Outil: OpenAI.fm -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">OpenAI.fm <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Alternative simple pour créer des fichiers audio à partir de texte. Idéal pour l’accessibilité ou la narration éducative.</p>
-                                <a href="https://openai.fm" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">OpenAI.fm <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <a href="https://openai.fm" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 6: Créer des activités H5P/MOODLE/Elea (Le 5 original est devenu 6 pour faire place au 5: Génération de prompt) -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-b5">
-                            <span>🛠️ Créer des activités H5P/MOODLE/Elea</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- B6: Caramel -->
+                    <div class="nested-block">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-purple-700 bg-purple-50 rounded-xl mb-3" onclick="toggleNested('sub-b6')">
+                            <span>🛠️ Créer des activités (H5P/Moodle)</span>
+                            <svg id="icon-sub-b6" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-b5" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Caramel -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Caramel 🇫🇷 (open source) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Caramel est une application web open source qui simplifie la création d’activités pédagogiques interactives en utilisant l’intelligence artificielle. Développée par Gauthier Remande (académie de Nantes) et Emmanuel Gaunard (académie de Grenoble), cette solution permet de générer des ressources compatibles avec H5P ou les plateformes Moodle/Éléa/Magistère, directement depuis un navigateur, sans installation et sans transmettre de données à un serveur.</p>
-                                <a href="https://caramel.forge.apps.education.fr/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-b6" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white border border-gray-100">
+                                <h4 class="font-bold text-slate-800">Caramel 🇫🇷 <span class="badge bg-green-100 text-green-700 ml-1">Gratuit</span></h4>
+                                <p class="text-xs text-gray-500">Génération de ressources interactives locales sécurisées.</p>
+                                <a href="https://caramel.forge.apps.education.fr/" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
@@ -284,358 +304,318 @@
                 </div>
             </div>
 
-            <!-- Catégorie C: Les grands modèles de langages (Ordre 3) - Tons de bleu clair -->
-            <div class="accordion-item bg-white rounded-xl shadow-lg overflow-hidden">
-                <button class="accordion-header w-full flex justify-between items-center p-5 font-bold text-xl text-blue-800 bg-blue-100 hover:bg-blue-200 focus:outline-none" aria-expanded="false" aria-controls="content-c">
-                    <span>🔐 C. Les grands modèles de langages avec création de compte</span>
-                    <svg class="arrow-icon w-6 h-6 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- CATÉGORIE C -->
+            <div class="category-block bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors" onclick="toggleAccordion('content-c')">
+                    <span class="text-xl font-bold text-slate-800 flex items-center">
+                        <span class="mr-3 p-2 bg-indigo-100 text-indigo-600 rounded-lg">🔐</span>
+                        C. Modèles avec compte (LLM)
+                    </span>
+                    <svg id="icon-content-c" class="rotate-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="content-c" class="accordion-content hidden p-5 space-y-4 border-t border-blue-300">
-
-                    <!-- Contenu direct de la catégorie C (Anciennement sub-content-c1) -->
-                    <div class="space-y-4">
-                        <!-- Outil: Mistral  -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">Mistral "Le Chat" 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                            <p class="text-sm mb-2">Modèle open source, multimodal, le plus conforme au RGPD. Excellente performance en français, respect de la confidentialité.</p>
-                            <a href="https://mistral.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                <div id="content-c" class="accordion-content p-6 pt-0 space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="tool-card p-4 rounded-xl border border-indigo-100 bg-indigo-50/30">
+                            <h4 class="font-bold text-indigo-800">Mistral "Le Chat" 🇫🇷</h4>
+                            <p class="text-xs text-gray-600">Open source, souveraineté européenne et respect du RGPD.</p>
+                            <a href="https://mistral.ai" target="_blank" class="inline-block mt-3 text-sm font-bold text-indigo-600 hover:underline">Accéder</a>
                         </div>
-                        <!-- Outil: Claude (Anthropic) -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">Claude (Anthropic) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                            <p class="text-sm mb-2">Excellent pour la rédaction, l’analyse de documents et la programmation. Gère les longues conversations et offre une interface claire.</p>
-                            <a href="https://claude.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div class="tool-card p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <h4 class="font-bold text-slate-800">Claude (Anthropic)</h4>
+                            <p class="text-xs text-gray-600">Excellent pour la rédaction fine et l'analyse de documents.</p>
+                            <a href="https://claude.ai" target="_blank" class="inline-block mt-3 text-sm font-bold text-slate-600 hover:underline">Accéder</a>
                         </div>
-                        <!-- Outil: ChatGPT (OpenAI) -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">ChatGPT (OpenAI) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                            <p class="text-sm mb-2">Modèle multimodal (texte, image, audio, vidéo) très polyvalent. La version gratuite reste plus limitée comme sur tous les autres modèles.</p>
-                            <a href="https://chat.openai.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div class="tool-card p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <h4 class="font-bold text-slate-800">ChatGPT (OpenAI)</h4>
+                            <p class="text-xs text-gray-600">Le plus polyvalent (texte, image, audio, vision).</p>
+                            <a href="https://chat.openai.com" target="_blank" class="inline-block mt-3 text-sm font-bold text-slate-600 hover:underline">Accéder</a>
                         </div>
-                        <!-- Outil: Gemini (Google) -->
-                        <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                            <h4 class="text-lg font-bold text-blue-700 mb-1">Gemini (Google) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                            <p class="text-sm mb-2">Modèle multimodal (texte, image, audio, vidéo). Idéal pour la synthèse complexe et l’intégration dans l’écosystème Google.</p>
-                            <a href="https://gemini.google.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div class="tool-card p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <h4 class="font-bold text-slate-800">Gemini (Google)</h4>
+                            <p class="text-xs text-gray-600">Idéal pour les synthèses et l'intégration Google Workspace.</p>
+                            <a href="https://gemini.google.com" target="_blank" class="inline-block mt-3 text-sm font-bold text-slate-600 hover:underline">Accéder</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Catégorie D: Outils spécialisés pour l’éducation (Ordre 4) - Tons de bleu clair -->
-            <div class="accordion-item bg-white rounded-xl shadow-lg overflow-hidden">
-                <button class="accordion-header w-full flex justify-between items-center p-5 font-bold text-xl text-blue-800 bg-blue-100 hover:bg-blue-200 focus:outline-none" aria-expanded="false" aria-controls="content-d">
-                    <span>🛠️ D. Outils spécialisés pour l’éducation</span>
-                    <svg class="arrow-icon w-6 h-6 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- CATÉGORIE D -->
+            <div class="category-block bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                <button class="accordion-header w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition-colors" onclick="toggleAccordion('content-d')">
+                    <span class="text-xl font-bold text-slate-800 flex items-center">
+                        <span class="mr-3 p-2 bg-orange-100 text-orange-600 rounded-lg">🛠️</span>
+                        D. Outils spécialisés éducation
+                    </span>
+                    <svg id="icon-content-d" class="rotate-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="content-d" class="accordion-content hidden p-5 space-y-6 border-t border-blue-300">
-
-                    <!-- Sous-catégorie 1: Outils tout-en-un -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d1">
-                            <span>🧰 Outils tout-en-un</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div id="content-d" class="accordion-content p-6 pt-0 space-y-4">
+                    
+                    <!-- D1: Tout-en-un -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d1')">
+                            <span>🧰 Plateformes tout-en-un</span>
+                            <svg id="icon-sub-d1" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d1" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil: Spirit (Pearltrees Éducation) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Spirit (Pearltrees Éducation) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Assistant IA intégré, conçu pour les enseignants. Il permet de prolonger l'analyse de documents longs (PDF, Office), de résoudre des exercices de mathématiques complexes (jusqu'à Math Sup) et offre une maîtrise avancée du français.</p>
-                                <a href="https://youtu.be/5TlH1iDJSbw?si=HqFPY2LuWzbt0I4p" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien (Vidéo de présentation)</a>
+                        <div id="sub-d1" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Spirit (Pearltrees) 🇫🇷</h4>
+                                <p class="text-xs text-gray-500">Assistant pour l'analyse PDF, mathématiques et rédaction.</p>
+                                <a href="https://youtu.be/5TlH1iDJSbw?si=HqFPY2LuWzbt0I4p" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Vidéo présentation</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">MagicSchool IA <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Plus de 40 fonctions pédagogiques (QCM, lettres, planification, différenciation). Une “boîte à outils IA” pour les enseignants.</p>
-                                <a href="https://www.magicschool.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">MagicSchool IA</h4>
+                                <p class="text-xs text-gray-500">40+ fonctions (QCM, planification, différenciation).</p>
+                                <a href="https://www.magicschool.ai" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 2: Analyse et synthèse de documents -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d2">
-                            <span>📑 Analyse et synthèse de documents</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D2: Analyse -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d2')">
+                            <span>📑 Analyse & Synthèse PDF</span>
+                            <svg id="icon-sub-d2" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d2" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">NotebookLM (Google) <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Analyse intelligente de documents + génération de podcasts, de vidéos et cartes mentales.</p>
-                                <a href="https://notebooklm.google" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d2" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">NotebookLM (Google)</h4>
+                                <p class="text-xs text-gray-500">Analyse intelligente et génération de podcasts.</p>
+                                <a href="https://notebooklm.google" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">ChatPDF <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Permet de poser des questions directement sur un PDF, avec réponses contextualisées et citations.</p>
-                                <a href="https://www.chatpdf.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">ChatPDF</h4>
+                                <a href="https://www.chatpdf.com" target="_blank" class="text-xs font-bold text-blue-600 mt-1 block">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 3: Présentations et supports visuels -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d3">
-                            <span>🎨 Présentations et supports visuels</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D3: Visuels -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d3')">
+                            <span>🎨 Présentations & Supports</span>
+                            <svg id="icon-sub-d3" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d3" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Canva IA <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création d’affiches, visuels et schémas éducatifs avec génération d’images IA.</p>
-                                <a href="https://www.canva.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d3" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Canva IA</h4>
+                                <a href="https://www.canva.com" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Gamma <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création de diaporamas interactifs à partir d’un texte, avec collaboration en ligne.</p>
-                                <a href="https://gamma.app" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Gamma</h4>
+                                <a href="https://gamma.app" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 4: Création d’activités pédagogiques -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d4">
-                            <span>🧮 Création d’activités pédagogiques</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D4: Activités -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d4')">
+                            <span>🧮 Création d’activités</span>
+                            <svg id="icon-sub-d4" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d4" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Quiz Wizard <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Générateur de quiz, QCM (directement exportable dans Pronote)et flashcards.</p>
-                                <a href="https://www.getquizwizard.com/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d4" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Quiz Wizard</h4>
+                                <a href="https://www.getquizwizard.com/" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Wooflash (Correlyce) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Financé par la région</span></h4>
-                                <p class="text-sm mb-2">Plateforme connectée à Atrium, pour créer des activités pédagogiques et suivre les résultats des élèves.</p>
-                                <a href="https://www.wooflash.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Wooflash (Correlyce) 🇫🇷</h4>
+                                <a href="https://www.wooflash.com" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 5: Chatbots pédagogiques -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d5">
-                            <span>💬 Chatbots pédagogiques</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D5: Chatbots -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d5')">
+                            <span>💬 Chatbots Pédagogiques</span>
+                            <svg id="icon-sub-d5" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d5" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Mizou Chatbot 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création simple de chatbots éducatifs respectueux du RGPD. Idéal pour l’aide personnalisée aux élèves.</p>
-                                <a href="https://mizou.com/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d5" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Mizou Chatbot 🇫🇷</h4>
+                                <a href="https://mizou.com/" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 6: Cartes mentales et visualisation -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d6">
-                            <span>🧠 Cartes mentales et visualisation</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D6: Mental Maps -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d6')">
+                            <span>🧠 Cartes Mentales & Visualisation</span>
+                            <svg id="icon-sub-d6" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d6" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Markmap 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit / open source</span></h4>
-                                <p class="text-sm mb-2">Transforme du texte en carte mentale interactive (format Markdown).</p>
-                                <a href="https://mymarkmap.vercel.app/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d6" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Markmap 🇫🇷</h4>
+                                <a href="https://mymarkmap.vercel.app/" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Napkin <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Génère automatiquement des visuels éducatifs à partir de texte.</p>
-                                <a href="https://napkin.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 rounded-lg bg-white">
+                                <h4 class="font-bold text-slate-800">Napkin</h4>
+                                <a href="https://napkin.ai" target="_blank" class="text-xs font-bold text-blue-600 block mt-1">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 7: Génération d’images (Avancé) -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d7">
-                            <span>🖼️ Génération d’images (Avancé)</span>
-                            <svg class="nested-arrow-icon w-5 h-6 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D7: Images Avancé -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d7')">
+                            <span>🖼️ Génération d'images (Avancé)</span>
+                            <svg id="icon-sub-d7" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d7" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <!-- Outil Canva IA -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Canva IA <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Pour affiches et visuels scolaires.</p>
-                                <a href="https://www.canva.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil Ideogram -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Ideogram <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Génération d’images avec texte intégré.</p>
-                                <a href="https://ideogram.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil Nanobanana -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Nanobanana <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Sa simplicité et sa précision en font une bonne alternative gratuite à Photoshop.</p>
-                                <a href="https://aistudio.google.com/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <!-- Outil ChatGPT (fonction image) -->
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">ChatGPT <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Dans ses versions récentes, ChatGPT permet également la génération d’images avec du texte de bonne qualité.</p>
-                                <a href="https://chat.openai.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d7" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="tool-card p-3 bg-white">
+                                    <h4 class="font-bold text-slate-800 text-sm">Ideogram</h4>
+                                    <a href="https://ideogram.ai" target="_blank" class="text-xs text-blue-600 font-bold">Lien</a>
+                                </div>
+                                <div class="tool-card p-3 bg-white">
+                                    <h4 class="font-bold text-slate-800 text-sm">Nanobanana</h4>
+                                    <a href="https://aistudio.google.com/" target="_blank" class="text-xs text-blue-600 font-bold">Lien</a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 8: Correction de copies  -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d8">
-                            <span>✏️ Correction de copies (Simplement à titre indicatif !)</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D8: Correction -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d8')">
+                            <span>✏️ Correction de copies</span>
+                            <svg id="icon-sub-d8" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d8" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Ed.ai 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Expérimentation dans l’académie de Nice (correction automatique de copies).</p>
-                                <a href="https://ed.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d8" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 bg-white">
+                                <h4 class="font-bold text-slate-800">Examino 🇫🇷</h4>
+                                <a href="https://examino.fr" target="_blank" class="text-xs text-blue-600 font-bold block">Accéder</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Examino 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">IA française pour la correction manuscrite rapide avec notes et appréciations.</p>
-                                <a href="https://examino.fr" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Logbook <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Plateforme pour feedbacks oraux personnalisés aux élèves.</p>
-                                <a href="https://www.logbook.education/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 bg-white">
+                                <h4 class="font-bold text-slate-800">Logbook</h4>
+                                <a href="https://www.logbook.education/" target="_blank" class="text-xs text-blue-600 font-bold block">Accéder</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 9: Génération de musique et vidéo -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d9">
-                            <span>🎵 Génération de musique et vidéo</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- D9: Musique & Vidéo -->
+                    <div class="nested-block mb-4">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d9')">
+                            <span>🎵 Musique & Vidéo</span>
+                            <svg id="icon-sub-d9" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d9" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Suno AI <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création de chansons ou jingles éducatifs.</p>
-                                <a href="https://suno.ai" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d9" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 bg-white">
+                                <h4 class="font-bold text-slate-800 text-sm">Suno AI</h4>
+                                <a href="https://suno.ai" target="_blank" class="text-xs text-blue-600 font-bold">Lien</a>
                             </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Vidnoz <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Génération de capsules vidéo avec avatars et voix synthétiques.</p>
-                                <a href="https://www.vidnoz.com" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Kling AI <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création de vidéos réalistes à partir de texte ou d’images.</p>
-                            <a href="https://app.klingai.com/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">Sora <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Génération de vidéos réalistes à partir de texte, avec avatars animés et narration synthétique.</p>
-                                <a href="https://sora.chatgpt.com/explore" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
-                            </div>
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">VO3 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full border border-yellow-300">Freemium</span></h4>
-                                <p class="text-sm mb-2">Création de vidéos IA avec rendu réaliste, audio intégré et respect précis des instructions textuelles.</p>
-                                <a href="https://gemini.google/fr/overview/video-generation/?hl=fr" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                            <div class="tool-card p-3 bg-white">
+                                <h4 class="font-bold text-slate-800 text-sm">Kling AI</h4>
+                                <a href="https://app.klingai.com/" target="_blank" class="text-xs text-blue-600 font-bold">Lien</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sous-catégorie 10: Génération de pages web -->
-                    <div class="nested-accordion-item">
-                        <button class="nested-accordion-header w-full flex justify-between items-center p-3 font-semibold text-lg text-blue-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none" aria-expanded="false" aria-controls="sub-content-d10">
+                    <!-- D10: Web Pages -->
+                    <div class="nested-block">
+                        <button class="w-full flex justify-between items-center p-3 font-bold text-orange-700 bg-orange-50 rounded-xl mb-3" onclick="toggleNested('sub-d10')">
                             <span>🌐 Génération de pages web</span>
-                            <svg class="nested-arrow-icon w-5 h-5 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="icon-sub-d10" class="rotate-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="sub-content-d10" class="nested-accordion-content hidden pt-3 pl-4 space-y-4">
-                            <div class="tool-card p-4 rounded-lg bg-white border-blue-500">
-                                <h4 class="text-lg font-bold text-blue-700 mb-1">CréeIAppli (open-source) 🇫🇷 <span class="text-sm font-semibold ml-2 px-3 py-1 bg-green-100 text-green-700 rounded-full border border-green-300">Gratuit</span></h4>
-                                <p class="text-sm mb-2">Outil pour créer une mini-application web fonctionnant même hors ligne. Développé dans le cadre de l’éducation nationale. (⚠️ Autres outils comme ChatGPT, Claude, Canva proposent aussi cette fonction.)</p>
-                                <a href="https://bidouiage.forge.apps.education.fr/creiappli/" target="_blank" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">🔗 Lien</a>
+                        <div id="sub-d10" class="nested-accordion-content space-y-3 pl-2">
+                            <div class="tool-card p-3 bg-white">
+                                <h4 class="font-bold text-slate-800">CréeIAppli 🇫🇷</h4>
+                                <a href="https://bidouiage.forge.apps.education.fr/creiappli/" target="_blank" class="text-xs text-blue-600 font-bold block">Lien</a>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </div>
+
+        <footer class="mt-16 text-center text-gray-400 text-sm border-t border-gray-100 pt-8">
+            <p>Ce répertoire est mis à jour périodiquement en fonction des évolutions technologiques.</p>
+            <p class="mt-2 font-bold text-gray-500 tracking-wider">GUIDE IA ÉDUCATION &copy; 2025</p>
+        </footer>
     </div>
-    <!-- JavaScript pour la fonctionnalité d'accordéon principal et imbriqué -->
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- LOGIQUE POUR LES ACCORDÉONS PRINCIPAUX (A, B, C, D) ---
-            const mainHeaders = document.querySelectorAll('.accordion-header');
-
-            mainHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const contentId = header.getAttribute('aria-controls');
-                    const content = document.getElementById(contentId);
-                    const arrowIcon = header.querySelector('.arrow-icon');
-
-                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-                    // 1. Fermer tous les autres accordéons principaux
-                    document.querySelectorAll('.accordion-item').forEach(item => {
-                        const otherHeader = item.querySelector('.accordion-header');
-                        const otherContent = item.querySelector('.accordion-content');
-                        const otherArrowIcon = item.querySelector('.arrow-icon');
-
-                        if (otherHeader !== header && otherHeader.getAttribute('aria-expanded') === 'true') {
-                            otherHeader.setAttribute('aria-expanded', 'false');
-                            otherContent.classList.add('hidden');
-                            otherArrowIcon.classList.add('rotate-180');
-                            otherArrowIcon.classList.remove('rotate-0');
-
-                            // Fermer également tous les sous-menus à l'intérieur
-                            otherContent.querySelectorAll('.nested-accordion-header').forEach(nestedHeader => {
-                                nestedHeader.setAttribute('aria-expanded', 'false');
-                                nestedHeader.nextElementSibling.classList.add('hidden');
-                                nestedHeader.querySelector('.nested-arrow-icon').classList.add('rotate-180');
-                                nestedHeader.querySelector('.nested-arrow-icon').classList.remove('rotate-0');
-                            });
-                        }
-                    });
-
-                    // 2. Ouvrir ou fermer l'accordéon cliqué
-                    if (isExpanded) {
-                        // Fermer
-                        header.setAttribute('aria-expanded', 'false');
-                        content.classList.add('hidden');
-                        arrowIcon.classList.add('rotate-180');
-                        arrowIcon.classList.remove('rotate-0');
-                    } else {
-                        // Ouvrir
-                        header.setAttribute('aria-expanded', 'true');
-                        content.classList.remove('hidden');
-                        arrowIcon.classList.remove('rotate-180');
-                        arrowIcon.classList.add('rotate-0');
-                    }
-                });
+        // Fonction pour gérer les accordéons principaux
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            const isActive = content.classList.contains('active');
+            
+            // On ferme les autres accordéons principaux pour plus de clarté
+            document.querySelectorAll('.accordion-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.rotate-icon').forEach(el => {
+                if (el.id.startsWith('icon-content')) el.classList.remove('active');
             });
 
-            // --- LOGIQUE POUR LES ACCORDÉONS IMBRIQUÉS (Sous-catégories) ---
-            const nestedHeaders = document.querySelectorAll('.nested-accordion-header');
+            if (!isActive) {
+                content.classList.add('active');
+                icon.classList.add('active');
+            }
+        }
 
-            nestedHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const contentId = header.getAttribute('aria-controls');
-                    const content = document.getElementById(contentId);
-                    const arrowIcon = header.querySelector('.nested-arrow-icon');
-                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        // Fonction pour gérer les accordéons imbriqués
+        function toggleNested(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            const isActive = content.classList.contains('active');
+            
+            if (isActive) {
+                content.classList.remove('active');
+                icon.classList.remove('active');
+            } else {
+                content.classList.add('active');
+                icon.classList.add('active');
+            }
+        }
 
-                    // Ouvrir ou fermer l'accordéon imbriqué
-                    if (isExpanded) {
-                        // Fermer
-                        header.setAttribute('aria-expanded', 'false');
-                        content.classList.add('hidden');
-                        arrowIcon.classList.add('rotate-180');
-                        arrowIcon.classList.remove('rotate-0');
-                    } else {
-                        // Ouvrir
-                        header.setAttribute('aria-expanded', 'true');
-                        content.classList.remove('hidden');
-                        arrowIcon.classList.remove('rotate-180');
-                        arrowIcon.classList.add('rotate-0');
-                    }
-                });
+        // Barre de recherche intelligente
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const toolCards = document.querySelectorAll('.tool-card');
+            const categories = document.querySelectorAll('.category-block');
+            const nestedBlocks = document.querySelectorAll('.nested-block');
+
+            if (term.length > 0) {
+                // On ouvre tout pour la recherche
+                document.querySelectorAll('.accordion-content').forEach(el => el.classList.add('active'));
+                document.querySelectorAll('.nested-accordion-content').forEach(el => el.classList.add('active'));
+                document.querySelectorAll('.rotate-icon').forEach(el => el.classList.add('active'));
+            } else {
+                // On réinitialise (on ferme tout sauf les headers)
+                document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.nested-accordion-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.rotate-icon').forEach(el => el.classList.remove('active'));
+            }
+
+            toolCards.forEach(card => {
+                const title = card.querySelector('h4').innerText.toLowerCase();
+                const desc = card.querySelector('p')?.innerText.toLowerCase() || "";
+                if (title.includes(term) || desc.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Masquer les blocs imbriqués vides
+            nestedBlocks.forEach(block => {
+                const visible = block.querySelectorAll('.tool-card[style="display: block;"]');
+                block.style.display = (visible.length > 0 || term === "") ? 'block' : 'none';
+            });
+
+            // Masquer les catégories vides
+            categories.forEach(cat => {
+                const visible = cat.querySelectorAll('.tool-card[style="display: block;"]');
+                cat.style.display = (visible.length > 0 || term === "") ? 'block' : 'none';
             });
         });
     </script>
